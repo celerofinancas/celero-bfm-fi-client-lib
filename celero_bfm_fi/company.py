@@ -1,6 +1,6 @@
 
 # Internal Imports
-from app.client import (
+from domains.company.client import (
     CompanyClient,
     CreateCompanyResponse,
     DeactivateCompanyResponse,
@@ -9,7 +9,8 @@ from app.client import (
 
 
 class Company:
-    """Company is a interface to interact with the CompanyClient without the need to know the gRPC details.
+    """Company is a interface to interact with the CompanyClient without
+    need to know the gRPC details.
 
     :param address: The address of the gRPC server.
     """
@@ -32,7 +33,7 @@ class Company:
         :param company_id: The ID of the company.
         :param company_name: The name of the company.
         :param trade_name: The trade name of the company.
-        :param legal_entity_registration: The legal entity registration number of the company. Brazilian CNPJ.
+        :param legal_entity_registration: Brazilian CNPJ.
         :return: The response from the CreateCompany RPC.
         """
         return self.client.create_company(
@@ -49,7 +50,7 @@ class Company:
         company_id: str,
         reason: str,
     ) -> DeactivateCompanyResponse:
-        """Deactivate a company. This method will call the DeactivateCompany RPC.
+        """Deactivate a company calling the DeactivateCompany RPC.
 
         :param token: The access token to authenticate the user.
         :param company_id: The ID of the company.
@@ -64,7 +65,7 @@ class Company:
         company_id: str,
         reason: str
     ) -> ReactivateCompanyResponse:
-        """Reactivate a company. This method will call the ReactivateCompany RPC.
+        """Reactivate a company calling the ReactivateCompany RPC.
 
         :param token: The access token to authenticate the user.
         :param company_id: The ID of the company.
