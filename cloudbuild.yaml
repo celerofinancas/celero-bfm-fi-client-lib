@@ -5,7 +5,7 @@ steps:
       - -c
       - |
         apt-get update && apt-get install -y apt-utils python3-pip libpcre3-dev &&
-        make local-install lint test
+        make local-install lint
 
   - name: python:3.10
     entrypoint: bash

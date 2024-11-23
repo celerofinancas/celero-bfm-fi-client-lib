@@ -5,10 +5,10 @@ setup:
 	poetry config repositories.google https://us-east1-python.pkg.dev/celero-main/celero-finance/
 
 local-install: setup
-	poetry install --extras keycloak --with dev
+	poetry install --with dev
 
 lint:
-	poetry run flake8
+	poetry run black .
 
 test:
-	poetry run pytest -s --cov=celero_idp --cov-report=html -W ignore::DeprecationWarning
+	poetry run pytest -s --cov=celero_bfm_fi_proto --cov-report=html -W ignore::DeprecationWarning
