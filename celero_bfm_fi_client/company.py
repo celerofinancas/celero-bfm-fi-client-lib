@@ -1,7 +1,8 @@
-
 # Internal Imports
-from domains.company.client import (
-    CompanyClient,
+from domains.company.client import CompanyClient
+
+# Celeiro Imports
+from celero_bfm_fi_proto.company.company_pb2 import (
     CreateCompanyResponse,
     DeactivateCompanyResponse,
     ReactivateCompanyResponse,
@@ -9,15 +10,15 @@ from domains.company.client import (
 
 
 class Company:
-    """Company is a interface to interact with the CompanyClient without
-    need to know the gRPC details.
+    """Company is an interface to interact with the CompanyClient without
+    needing to know the gRPC details.
 
     :param address: The address of the gRPC server.
+    :param ssl_cert: The SSL certificate for secure communication.
     """
 
-    def __init__(self, address: str):
-        self.address = address
-        self.client = CompanyClient(self.address)
+    def __init__(self, address: str, ssl_cert: str):
+        self.client = CompanyClient(address, ssl_cert)
 
     def create(
         self,
@@ -25,7 +26,7 @@ class Company:
         company_id: str,
         company_name: str,
         trade_name: str,
-        legal_entity_registration: str
+        legal_entity_registration: str,
     ) -> CreateCompanyResponse:
         """Create a company. This method will call the CreateCompany RPC.
 
@@ -60,10 +61,7 @@ class Company:
         return self.client.deactivate_company(token, company_id, reason)
 
     def reactivate(
-        self,
-        token: str,
-        company_id: str,
-        reason: str
+        self, token: str, company_id: str, reason: str
     ) -> ReactivateCompanyResponse:
         """Reactivate a company calling the ReactivateCompany RPC.
 
